@@ -1,7 +1,8 @@
 var chosenColor;
 
 function setup() {
- 	createCanvas(400, 400);
+  canvas = createCanvas(window.innerWidth * .9, window.innerHeight * .9);
+  canvas.position(25, 25);
   background(0, 0, 40);
 
   chosenColor = color(40, 0, 80);
@@ -16,6 +17,17 @@ function setup() {
   buttonHandler('Blue', 7, 46, 109)
   buttonHandler('Light Blue', 9, 186, 239);
   buttonHandler('Pink', 239, 9, 178);
+
+  random = createButton("Random");
+  random.mousePressed(function() {
+    var rr = Math.round(Math.random(0, 255) * 100);
+    var rg = Math.round(Math.random(0, 255) * 100);
+    var rb = Math.round(Math.random(0, 255) * 100);
+
+    console.log(`rr: ${rr}, rg: ${rg}, rb: ${rb}`)
+    chosenColor = color(rr, rg, rb);
+  });
+
 
   lineSizeSlider = createSlider(5, 72, 36);  
 
@@ -43,10 +55,9 @@ function mouseDragged() {
 
 function buttonHandler(title, r, g, b) {
   title = createButton(title);
-    title.mousePressed(function() {
+  title.mousePressed(function() {
     chosenColor = color(r, g, b)
-    console.log(chosenColor);
-    });
+  });
   return title;
 }
 
